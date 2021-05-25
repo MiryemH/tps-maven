@@ -15,13 +15,23 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!--creation de la propriété junit.version de valeur 3.8.1-->
-    <junit.version>3.8.1</junit.version> 
+    <junit.version>3.8.1</junit.version>
+      <!--Création d’une propriété mode avec la valeur DEV. de application.properties-->
+      <!--<mode>DEV</mode>-->
   </properties>
 
   <!--personnaliser le nom du livrable généré par mvn package en lui donnant le nom de l'artefact : premier-projet-maven-->
   <build>
+      <!--la prop project est générée par défaut par Maven, c'est modèle objet du projet courant-->
     <finalName>${project.artifactId}</finalName> 
-    <!--la prop project est générée par défaut par Maven, c'est modèle objet du projet courant-->
+
+      <!-- Activation du remplacement des variables via Maven -->
+      <resources>
+          <resource>
+              <directory>src/main/resources</directory>
+              <filtering>true</filtering>
+          </resource>
+      </resources>
     <!--on doit ajouter une main class pour que le jar soit exécutable
     JAR soit exécutable, il doit contenir un fichier META-INF/MANIFEST.MF dont un attribut Main-Class est renseigné.-->
 
@@ -69,4 +79,22 @@
       <version>0.0.3</version>
     </dependency>
   </dependencies>
+    <!-- Creation de deux profils -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mode>DEV</mode>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <mode>PROD</mode>
+            </properties>
+        </profile>
+    </profiles>
 </project>
