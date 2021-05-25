@@ -22,6 +22,37 @@
   <build>
     <finalName>${project.artifactId}</finalName> 
     <!--la prop project est générée par défaut par Maven, c'est modèle objet du projet courant-->
+    <!--on doit ajouter une main class pour que le jar soit exécutable
+    JAR soit exécutable, il doit contenir un fichier META-INF/MANIFEST.MF dont un attribut Main-Class est renseigné.-->
+
+     <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>2.4</version>
+              <configuration>
+                  <archive>
+                      <manifest>
+                          <mainClass>dev.App</mainClass>
+                      </manifest>
+                  </archive>
+              </configuration>
+          </plugin>
+         <!-- configuration du plugin shade -->
+         <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-shade-plugin</artifactId>
+             <version>3.0.0</version>
+             <executions>
+                 <execution>
+                     <phase>package</phase>
+                     <goals>
+                         <goal>shade</goal>
+                     </goals>
+                 </execution>
+             </executions>
+         </plugin>
+      </plugins>
   </build>
   <dependencies>
     <dependency>
