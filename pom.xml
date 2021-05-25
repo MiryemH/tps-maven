@@ -14,13 +14,22 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <!--creation de la propriété junit.version de valeur 3.8.1-->
+    <junit.version>3.8.1</junit.version> 
   </properties>
 
+  <!--personnaliser le nom du livrable généré par mvn package en lui donnant le nom de l'artefact : premier-projet-maven-->
+  <build>
+    <finalName>${project.artifactId}</finalName> 
+    <!--la prop project est générée par défaut par Maven, c'est modèle objet du projet courant-->
+  </build>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <!-- reutiliser la propriété junit.version -->
+      <version>${junit.version}</version>
+      <!--version>3.8.1</version-->
       <scope>test</scope>
     </dependency>
   </dependencies>
